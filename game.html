@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spiel – Moreno Pirnstill</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; background: #f9f9f9; color: #333; margin: 0; padding: 0; }
+    header { background: #005f73; color: #fff; padding: 40px 20px; text-align: center; }
+    section { max-width: 600px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input[type="number"] { padding: 8px; width: 100px; }
+    button { padding: 8px 16px; margin-left: 8px; }
+    #contact-link { margin-top: 20px; display: none; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Spiel – Zahlenraten</h1>
+  <p>Errate die geheime Zahl zwischen 1 und 10</p>
+</header>
+
+<section>
+  <label for="guess">Dein Tipp:</label>
+  <input type="number" id="guess" min="1" max="10">
+  <button onclick="checkGuess()">Raten</button>
+  <p id="feedback"></p>
+  <div id="contact-link">
+    <p>Glückwunsch! Du hast gewonnen.</p>
+    <a href="contact.html">Hier kannst du mich kontaktieren</a>
+  </div>
+</section>
+
+<script>
+  const secret = Math.floor(Math.random() * 10) + 1;
+  function checkGuess() {
+    const guess = parseInt(document.getElementById('guess').value, 10);
+    const feedback = document.getElementById('feedback');
+    if (!guess || guess < 1 || guess > 10) {
+      feedback.textContent = 'Bitte gib eine Zahl zwischen 1 und 10 ein.';
+      return;
+    }
+    if (guess === secret) {
+      feedback.textContent = '';
+      document.getElementById('contact-link').style.display = 'block';
+    } else if (guess < secret) {
+      feedback.textContent = 'Zu niedrig – versuch es noch einmal!';
+    } else {
+      feedback.textContent = 'Zu hoch – versuch es noch einmal!';
+    }
+  }
+</script>
+</body>
+</html>
